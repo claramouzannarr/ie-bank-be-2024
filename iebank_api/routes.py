@@ -25,7 +25,9 @@ def skull():
 @app.route('/accounts', methods=['POST'])
 def create_account():
     name = request.json['name']
+    country = request.json['country']
     currency = request.json['currency']
+    account = Account(name, country, currency)
     account = Account(name, currency)
     db.session.add(account)
     db.session.commit()
@@ -59,6 +61,7 @@ def format_account(account):
     return {
         'id': account.id,
         'name': account.name,
+        'country': account.country, 
         'account_number': account.account_number,
         'balance': account.balance,
         'currency': account.currency,
