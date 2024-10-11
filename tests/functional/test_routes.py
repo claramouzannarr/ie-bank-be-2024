@@ -26,7 +26,23 @@ def test_create_account(testing_client):
     WHEN the '/accounts' page is posted to (POST)
     THEN check the response is valid
     """
-    response = testing_client.post('/accounts', json={'name': 'John Doe', 'currency': '€'})
+    response = testing_client.post('/accounts', json={'name': 'John Doe', 'country': 'Lebanon', 'currency': '€' })
     assert response.status_code == 200
+    data = response.get_json()
+    assert data['country'] == 'Lebanon'
+
+def test_update_account(testing_client):
+    """
+    GIVEN a Flask application
+    WHEN the '/accounts/<id>' page is updated (PUT)
+    THEN check the response is valid and the account is updated
+    """
+    response = testing_client.put('/accounts/1', json={
+        'name': 'Jane Doe',  
+    })
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['country'] == 'Lebanon'
+
 
 
