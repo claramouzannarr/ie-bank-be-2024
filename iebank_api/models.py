@@ -16,11 +16,7 @@ class Account(db.Model):
     def __repr__(self):
         return '<Event %r>' % self.account_number
 
-<<<<<<< HEAD
     def __init__(self, name, currency, country):
-=======
-    def __init__(self, name, country,currency):
->>>>>>> 86c5945c58957430bac44d413d69e5d05cfff7ae
         self.name = name
         self.country = country 
         self.account_number = ''.join(random.choices(string.digits, k=20))
